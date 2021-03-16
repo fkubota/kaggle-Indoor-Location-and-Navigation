@@ -18,7 +18,7 @@ while getopts "p:g:" OPT
 
 # g=-1 なら--gpusオプションを削除
 if [ $GPU = -1 ]; then
-	sudo docker run --rm -it --shm-size=8g -p $PORT:$PORT -v /etc/localtime:/etc/localtime:ro -v /home/fkubota/Git/:/home/user/work/ fkubota/rfcx bash
+	sudo docker run --rm -it --shm-size=8g -p $PORT:$PORT -v /etc/localtime:/etc/localtime:ro -v /home/fkubota/Git/:/home/user/work/ fkubota/indoor bash
 else
-	sudo docker run --rm -it --shm-size=8g --gpus $GPU -p $PORT:$PORT -v /etc/localtime:/etc/localtime:ro -v /home/fkubota/Git/:/home/user/work/ fkubota/rfcx bash
+	sudo docker run --rm -it --shm-size=8g --gpus $GPU -p $PORT:$PORT -v /etc/localtime:/etc/localtime:ro -v /home/fkubota/Git/:/home/user/work/ fkubota/indoor bash
 fi
