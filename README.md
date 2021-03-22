@@ -44,3 +44,17 @@ Microsoft Researchは、マイクロソフトの研究子会社です。その�
 
 
 ### 20210321
+- 今日は[公式リポジトリ](https://github.com/location-competition/indoor-location-competition-20)の確認
+  - IMU: 完成軽装装置。加速度計、ジャイロスコープとか計測する。
+  - [geoJsonの勉強サイト](https://gis-oer.github.io/gitbook/book/materials/web_gis/GeoJSON/GeoJSON.html)見つけた。
+  - type と repolutionの例
+
+    |TYPE|resolution|
+    |---|---|
+    |Accelerometer | 0.0023956299|
+    |Gyroscope |0.0010681152|
+    |Magnetometer |0.5996704|
+    |AccelerometerUncalibrated |0.0023956299|
+    |GyroscopeUncalibratedv |0.0010681152|
+    |MagnetometerUncalibrated |0.5996704|
+
