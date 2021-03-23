@@ -58,3 +58,5 @@ Microsoft Researchは、マイクロソフトの研究子会社です。その�
     |GyroscopeUncalibratedv |0.0010681152|
     |MagnetometerUncalibrated |0.5996704|
 
+### 20210323
+- koukiさんに[wifiデータセット](https://www.kaggle.com/kokitanisaka/indoorunifiedwifids)を落とした
