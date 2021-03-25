@@ -60,3 +60,17 @@ Microsoft Researchは、マイクロソフトの研究子会社です。その�
 
 ### 20210323
 - koukiさんに[wifiデータセット](https://www.kaggle.com/kokitanisaka/indoorunifiedwifids)を落とした
+
+### 20210324
+- nb001
+    - [yukiさんのノートブック](https://github.com/yuki-a4/Indoor/blob/main/COLAB/notebook/exp003-0.ipynb)を真似してみた
+    - 自分が使いやすくするための改良したい部分が多々あるのでnb002でリファクタリングする
+
+
+### 20210325    
+- nb002
+    - base: nb001
+    - nb001がとりあえずうごいたので、サブするためにちょっと改良
+    - スケジューラまわりがへんだったので修正
+- nikaido notion
+    - https://www.notion.so/4510761d234d4d4296bceeb4180a83e5
