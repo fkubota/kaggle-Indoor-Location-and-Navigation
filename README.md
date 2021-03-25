@@ -10,6 +10,7 @@ docker run: `sh run_docker.sh -p 8713 -g 0`
 	- gpu使わない場合は `-g -1` とする
 
 ## Links
+- [model mindmap](https://drive.mindmup.com/map/1WJZQxXyaOuGKm-UtM4yi_fX8l2jtjtCE)
 - [googledrive](https://drive.google.com/drive/u/1/folders/1lFPbS1gHwJabM4CTQju0tiJaJJxHnmEe)
 - [issue board](https://github.com/fkubota/kaggle-Indoor-Location-and-Navigation/projects/1)
 - [team issue](https://github.com/sinchir0/indoor/issues)
@@ -68,9 +69,13 @@ Microsoft Researchは、マイクロソフトの研究子会社です。その�
 
 
 ### 20210325    
+- data/input に[この公開notebook](https://www.kaggle.com/nigelhenry/simple-99-accurate-floor-model)のsubを保存した。acc_floor が 99%出るやつ
 - nb002
     - base: nb001
     - nb001がとりあえずうごいたので、サブするためにちょっと改良
     - スケジューラまわりがへんだったので修正
+    - result
+        - cv: 6.015497092406876
+        - lb: 7.517
 - nikaido notion
     - https://www.notion.so/4510761d234d4d4296bceeb4180a83e5
