@@ -79,3 +79,4 @@ Microsoft Researchは、マイクロソフトの研究子会社です。その�
         - lb: 7.517
 - nikaido notion
     - https://www.notion.so/4510761d234d4d4296bceeb4180a83e5
+- nn.Embeddingの[解説](https://gotutiyan.hatenablog.com/entry/2020/09/02/200144)めっちゃわかりやすい。
