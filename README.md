@@ -128,6 +128,7 @@ Microsoft Researchは、マイクロソフトの研究子会社です。その�
 
 ### 20210329  
 - rssiの[説明記事](https://www.ibsjapan.co.jp/tech/details/metageek-solution/wifi-signal-strength-basics.html)
+- nb003
 - あるサイトのbssidを数えた
     - ↓を見てわかるように、回数はまばらである。種類は3000を超える
 
@@ -135,6 +136,55 @@ Microsoft Researchは、マイクロソフトの研究子会社です。その�
 
 - ssidとbssidの[わかりやすい説明](https://netsurbible.com/ssid-essid-aoss-bssid)
 
-- nb003
 - nb004
+    - site毎のwifiデータフレーム作った
+        - 結構サイズに差があるんだよなぁ
+
+        |size|path|
+        |---|---|
+        |323M|nb004_wifi_5a0546857ecc773753327266.csv|
+        |299M|nb004_wifi_5c3c44b80379370013e0fd2b.csv|
+        |691M|nb004_wifi_5d27075f03f801723c2e360f.csv|
+        |115M|nb004_wifi_5d27096c03f801723c31e5e0.csv|
+        |128M|nb004_wifi_5d27097f03f801723c320d97.csv|
+        | 64M|nb004_wifi_5d27099f03f801723c32511d.csv|
+        | 53M|nb004_wifi_5d2709a003f801723c3251bf.csv|
+        |262M|nb004_wifi_5d2709b303f801723c327472.csv|
+        |276M|nb004_wifi_5d2709bb03f801723c32852c.csv|
+        |286M|nb004_wifi_5d2709c303f801723c3299ee.csv|
+        |103M|nb004_wifi_5d2709d403f801723c32bd39.csv|
+        |106M|nb004_wifi_5d2709e003f801723c32d896.csv|
+        | 15M|nb004_wifi_5da138274db8ce0c98bbd3d2.csv|
+        |363M|nb004_wifi_5da1382d4db8ce0c98bbe92e.csv|
+        |192M|nb004_wifi_5da138314db8ce0c98bbf3a0.csv|
+        | 27M|nb004_wifi_5da138364db8ce0c98bc00f1.csv|
+        |195M|nb004_wifi_5da1383b4db8ce0c98bc11ab.csv|
+        | 78M|nb004_wifi_5da138754db8ce0c98bca82f.csv|
+        | 99M|nb004_wifi_5da138764db8ce0c98bcaa46.csv|
+        | 51M|nb004_wifi_5da1389e4db8ce0c98bd0547.csv|
+        |419M|nb004_wifi_5da138b74db8ce0c98bd4774.csv|
+        |423M|nb004_wifi_5da958dd46f8266d0737457b.csv|
+        |487M|nb004_wifi_5dbc1d84c1eb61796cf7c010.csv|
+        |227M|nb004_wifi_5dc8cea7659e181adb076a3f.csv|
+
 - nb005
+    - ssid と bssid について勉強した
+    - `ssid`: スマホでwifiつなぐ時に選ぶあれ
+    - `bssid`: wifiの機器固有の名前
+    - 空港で例えると(kyouheiさんの素晴らしい例)
+        - 空港でwifiに接続する(`ssid`を選ぶ)。
+        - 歩くと、wifiを供給していた機器(`bssid`) から離れ電波が悪くなる。
+        - しかし離れて範囲外になっても、空港内であれば常に同じ `ssid` で接続ができている。
+        - これは、空港officialの `bssid` があり、その`bssid` が共通の `ssid` と紐付いてるからである。
+    - 上記の空港の例からある仮説が生まれた
+      - > offical ssid にひもづいいているユニークな `bssid` の数は多いのでは？
+      - これをこのノートブックでは確かめた。
+      - **そして、めちゃくちゃそれっぽい結果出た！**。ふたつほど例を上げる。
+
+        <img src='./data/info/readme/005.png' width='400'>  
+        <img src='./data/info/readme/006.png' width='400'>  
+
+- nb006
+    - floor imageを一覧で見れるようにする
+    - nb006のoutputに保存した
+    - [google slide](https://docs.google.com/presentation/d/1h8fdRoYMLDnbcq3YevQD2qmMygLPyX1E5EXbIrJ6F0M/edit#slide=id.p) に貼り付けておく
