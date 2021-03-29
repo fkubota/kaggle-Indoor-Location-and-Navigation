@@ -19,6 +19,7 @@ docker run: `sh run_docker.sh -p 8713 -g 0`
 
 
 ## info
+- コンペに出てくるpathという概念がややこしいので、`route` と言い換えることにする。
 - test_site_list = [
     '5a0546857ecc773753327266',
     '5c3c44b80379370013e0fd2b',
@@ -124,3 +125,16 @@ Microsoft Researchは、マイクロソフトの研究子会社です。その�
 
 
 ### 20210328
+
+### 20210329  
+- rssiの[説明記事](https://www.ibsjapan.co.jp/tech/details/metageek-solution/wifi-signal-strength-basics.html)
+- あるサイトのbssidを数えた
+    - ↓を見てわかるように、回数はまばらである。種類は3000を超える
+
+    <img src='./data/info/readme/004.png' width='200'>  
+
+- ssidとbssidの[わかりやすい説明](https://netsurbible.com/ssid-essid-aoss-bssid)
+
+- nb003
+- nb004
+- nb005
