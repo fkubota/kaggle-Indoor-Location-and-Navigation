@@ -188,3 +188,14 @@ Microsoft Researchは、マイクロソフトの研究子会社です。その�
     - floor imageを一覧で見れるようにする
     - nb006のoutputに保存した
     - [google slide](https://docs.google.com/presentation/d/1h8fdRoYMLDnbcq3YevQD2qmMygLPyX1E5EXbIrJ6F0M/edit#slide=id.p) に貼り付けておく
+
+
+### 20210330
+- 二階堂さんによる素晴らしい timestamp vs last_seen_timestamp の [issue](https://github.com/sinchir0/indoor/issues/25)    
+  - [このissue](https://www.kaggle.com/c/indoor-location-navigation/discussion/223181)も参考になるかも。
+  - wifiデータについての解析
+  - 縦軸: index, 横軸: 時間
+
+    <img src='./data/info/readme/007.png' width='700'>  
+
+- nb007
