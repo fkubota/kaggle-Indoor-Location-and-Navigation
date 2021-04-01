@@ -226,3 +226,10 @@ Microsoft Researchは、マイクロソフトの研究子会社です。その�
     - todo
         - [ ] どのbssidを追いかけるか考える(ssidに属しているのが大きいやつ？、小さいやつ？)
         - [ ] bssid 毎に rssi を可視化
+        - [ ] ある一つのやつにフィットさせてみる
+
+- なんかこのサイトだけ下にずれてる...
+
+    <img src='./data/info/readme/010.png' width='700'>  
+
+- rssiの減衰度で位置推定の[記事](https://blog.tpc.jp/2018/08/pi-beacon-rssi-measurement-test.html)
