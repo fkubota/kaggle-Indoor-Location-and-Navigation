@@ -19,7 +19,7 @@ docker run: `sh run_docker.sh -p 8713 -g 0`
 
 
 ## info
-- コンペに出てくるpathという概念がややこしいので、`route` と言い換えることにする。
+- コンペに出てくるpathという概念がややこしいので、`trace` と言い換えることにする。
 - test_site_list = [
     '5a0546857ecc773753327266',
     '5c3c44b80379370013e0fd2b',
@@ -199,3 +199,30 @@ Microsoft Researchは、マイクロソフトの研究子会社です。その�
     <img src='./data/info/readme/007.png' width='700'>  
 
 - nb007
+    - モデルの性能を確認する可視化
+    - なんかイケてる感じに作れなかった
+    - site_eval_report関数作ってチームに配った！いい感じ！
+- nb008
+    - floor image と traceの可視化(例を２つのせる)
+    - 画像は、 `/root git/data/nb/008/floor_images_with_trace` に保存
+
+    <img src='./data/info/readme/008.png' width='300'>  
+    <img src='./data/info/readme/009.png' width='300'>  
+
+
+- nb009
+    - nb008で作成したfloor_image_with_traceにsubmitファイルを描画してみる
+
+### 20210331
+- nb008のoutputにvisualize_submission.ipynbを追加(配布用途)
+
+
+### 20210401
+- nb010
+    - waypointをsite, floor毎にcsvで保存する
+
+
+- nb011
+    - todo
+        - [ ] どのbssidを追いかけるか考える(ssidに属しているのが大きいやつ？、小さいやつ？)
+        - [ ] bssid 毎に rssi を可視化
