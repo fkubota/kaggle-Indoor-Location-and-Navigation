@@ -263,3 +263,42 @@ Microsoft Researchは、マイクロソフトの研究子会社です。その�
         <img src='./data/info/readme/017.png' width='300'>  
         <img src='./data/info/readme/018.png' width='300'>  
         <img src='./data/info/readme/019.png' width='300'>  
+
+- nb013
+    - で作ったアルゴリズムをもとにcsvを作成。
+    - csvのカラムは以下のような感じ
+    ```
+    'ssid'
+    'bssid'
+    'bssid_x'
+    'bssid_y'
+    'n_samples'
+    'n_samples_rssi_over_m50'
+    'n_samples_rssi_over_m55'
+    'n_samples_rssi_over_m60'
+    'n_samples_rssi_over_m65'
+    'n_samples_rssi_over_m70'
+    'site'
+    'floor'
+    ```
+    - `n_samples_rssi_over_m50` は rssiが-50以上あるサンプルの数を表す
+
+
+- nb014
+    - 1つのbssidが複数のssidにひもづいいていることもあるっぽい
+        <img src='./data/info/readme/020.png' width='300'>  
+
+    - bssid, ssid でgroupbyした
+        - floor毎に座標がかなり異なっているパターンがあってそのためにstdが大きくなっているっぽい
+        - これは、n_samples_rssi_over_mxxの数とかを閾値にすれば小さくなるはず。
+            <img src='./data/info/readme/021.png' width='700'>  
+    
+    - ↑をfloor毎に見てみた(groupbyしてるけどみやすさのため)
+        - floor毎に値が結構ことなるが、n_samples_rssi_over_m60 の数が多いほど信頼できそうなのがわかる
+        <img src='./data/info/readme/022.png' width='700'>  
+    
+    - 条件をいろいろ絞ってみた。
+        - n_samples と、 n_samples_rssi_over_m60 を閾値として調整すると、stdが小さくなることがわかった。
+        - n_samplesは固定で、 n_samples_rssi_over_m60>=nのnを大きくしていき、全体の5%になるように調整した。
+
+            <img src='./data/info/readme/023.png' width='300'>  
