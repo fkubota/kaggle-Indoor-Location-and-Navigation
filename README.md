@@ -223,13 +223,43 @@ Microsoft Researchは、マイクロソフトの研究子会社です。その�
 
 
 - nb011
-    - todo
-        - [ ] どのbssidを追いかけるか考える(ssidに属しているのが大きいやつ？、小さいやつ？)
-        - [ ] bssid 毎に rssi を可視化
-        - [ ] ある一つのやつにフィットさせてみる
+    - こんな感じであるbssidの場所を特定した！
+    - 手法
+        1. bssidをplot(強度はrssiを使う)
+        2. 中心をwaypoint、強度をrssiとする2次元ガウス分布を作りその和を作成する
+        3. 和に対して2次元ガウス分布フィッティングを行いその中心点をbssidの置き場所とする。
+
+        <img src='./data/info/readme/011.png' width='500'>  
 
 - なんかこのサイトだけ下にずれてる...
 
     <img src='./data/info/readme/010.png' width='700'>  
 
 - rssiの減衰度で位置推定の[記事](https://blog.tpc.jp/2018/08/pi-beacon-rssi-measurement-test.html)
+
+### 20210402
+- リーク発覚??
+    - https://www.kaggle.com/c/indoor-location-navigation/discussion/228898
+
+- nb012
+    - nb011で行ったbssidの特定、siteやfloorをまたいでいくつかざっと見てみる。
+    - 関数も作ってみる。
+    - あるsiteのuniuqeなrssi
+        - [-93., -92., -91., -90., -89., -88., -87., -86., -85., -84., -83.,
+       -82., -81., -80., -79., -78., -77., -76., -75., -74., -73., -72.,
+       -71., -70., -69., -68., -67., -66., -65., -64., -63., -62., -61.,
+       -60., -59., -58., -57., -56., -55., -54., -53., -52., -51., -50.,
+       -49., -48., -47., -46., -45., -44., -43., -42., -41., -40., -39.,
+       -38., -37., -36., -35., -34., -33., -32., -31., -30., -29., -28.,
+       -27., -26., -23., -18.]
+    - fitting時に、width_meter, height_mehterを使ってmin, maxを指定した
+    - めちゃくちゃいい感じやん！(例をいくつか載せる)
+
+        <img src='./data/info/readme/012.png' width='300'>  
+        <img src='./data/info/readme/013.png' width='300'>  
+        <img src='./data/info/readme/014.png' width='300'>  
+        <img src='./data/info/readme/015.png' width='300'>  
+        <img src='./data/info/readme/016.png' width='300'>  
+        <img src='./data/info/readme/017.png' width='300'>  
+        <img src='./data/info/readme/018.png' width='300'>  
+        <img src='./data/info/readme/019.png' width='300'>  
