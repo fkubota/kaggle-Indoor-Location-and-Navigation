@@ -428,28 +428,40 @@ Microsoft Researchは、マイクロソフトの研究子会社です。その�
 
 
 - nb022
-    - hoge
-    - site=hogeだけ
+    - site=5d27075f03f801723c2e360f だけ
+    - base: nb002
+        - 該当するsiteのスコアは 5.832
     - result
+        - 悪くなった...まじか...
         - cv: 6.028568574279571
 
 
 - nb023
-    - hoge
-    - site=hogeだけ
-    - hogehoge
+    - base: nb022(cv: 6.028569)
+    - nb022に bssid_pos特徴量を追加
+    - site=5d27075f03f801723c2e360f だけ
     - result
         - cv: 6.490273971932213
 
 
 - nb024
-    - hoge
-    - site=hogeだけ
+    - base: nb023
+    - nb023のhq ver
+    - site=5d27075f03f801723c2e360f だけ
     - hq
     - 条件
         - hoge
     reuslt
-        - cv: 
+        - cv: 6.492024131475972
 
 
 ### 20210409
+- nb025
+    - base(nb022)
+    - site=5c3c44b80379370013e0fd2b だけ
+    - result
+        - cv: 6.028568574279571
+
+
+### 20210410
+- pytorch lightnningを導入する
