@@ -169,7 +169,7 @@ def train_cv(config, run_name):
                group=f'{exp_name}_{run_name}',
                name='summary')
     wandb.log({
-        'CV_mean': np.mean(val_scores),
+        'MPE/val': np.mean(val_scores),
         'CV_std': np.std(val_scores)
         })
     wandb.finish()

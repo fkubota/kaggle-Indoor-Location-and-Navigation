@@ -7,8 +7,6 @@ from loguru import logger
 
 import utils as U
 import trainner
-# import configuration as C
-import result_handler as rh
 
 
 def run_exp(run_name, config_update):
@@ -53,11 +51,32 @@ def start_sweep_dict(list_config_str):
 def main():
     list_config_str = [
             '''
-            globals:
-                seed: 5713
+            feature:
+              num_feats: 20
+            ''',
+            '''
+            feature:
+              num_feats: 45
+            ''',
+            '''
+            feature:
+              num_feats: 50
+            ''',
+            '''
+            feature:
+              num_feats: 65
+            ''',
+            '''
+            feature:
+              num_feats: 80
+            ''',
+            '''
+            feature:
+              num_feats: 100
             ''',
             ]
 
+    U.check_update_config_key(list_config_str)
     start_sweep_dict(list_config_str)
 
 

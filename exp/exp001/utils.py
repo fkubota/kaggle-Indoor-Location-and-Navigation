@@ -79,22 +79,6 @@ def get_save_dir_exp(config, run_name):
     return dir_save_exp, dir_save_ignore_exp, exp_name
 
 
-def mixup_data(x, y, alpha=1.0, use_cuda=True):
-    '''Returns mixed inputs, pairs of targets, and lambda'''
-    if alpha > 0:
-        lam = np.random.beta(alpha, alpha)
-    else:
-        lam = 1
-    batch_size = x.size()[0]
-    if use_cuda:
-        index = torch.randperm(batch_size).cuda()
-    else:
-        index = torch.randperm(batch_size)
-    mixed_x = lam * x + (1 - lam) * x[index, :]
-    y_a, y_b = y, y[index]
-    return mixed_x, y_a, y_b, lam
-
-
 def get_debug_idx(trn_tp, trn_idxs, val_idxs, config):
     n_classes = config['model']['params']['n_classes']
 
@@ -126,19 +110,6 @@ def set_debug_config(config):
         return config
     else:
         return config
-
-
-def sec2time(sec):
-    hour = int(sec//3600)
-    minute = int((sec - 3600*hour)//60)
-    second = int(sec - 3600*hour - 60*minute)
-
-    hour = str(hour).zfill(2)
-    minute = str(minute).zfill(2)
-    second = str(second).zfill(2)
-    str_time = f'{hour}:{minute}:{second}'
-
-    return str_time
 
 
 def get_dataset(config):
@@ -203,29 +174,25 @@ def get_dataset(config):
     return df_train, df_test, sub, bssid_feats, rssi_feats, wifi_bssids_size
 
 
-def plot_confusion_matrix(truth, pred, n_classes, normalize=False, title=''):
-    cm = confusion_matrix(truth, pred)
-    if normalize:
-        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+def check_update_config_key(list_config_str):
+    '''
+    存在しないkeyをupdateしていないかチェック
+    '''
+    pwd = os.path.dirname(os.path.abspath(__file__))
+    with open(f'{pwd}/config.yml', 'r') as yml:
+        config = yaml.safe_load(yml)
 
-    fig = plt.figure(figsize=(10, 10))
-    plt.imshow(cm, interpolation='nearest', cmap=plt.cm.Blues)
-    plt.title('Confusion matrix', size=15)
-    plt.colorbar(fraction=0.046, pad=0.04)
-    tick_marks = np.arange(n_classes)
-    plt.xticks(tick_marks, tick_marks, rotation=45)
-    plt.yticks(tick_marks, tick_marks)
+    for i_run, config_str in enumerate(list_config_str, 1):
+        config_update = yaml.safe_load(config_str)
+        check_key(config, config_update)
 
-    fmt = '.2f' if normalize else 'd'
-    thresh = cm.max() / 2.
-    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
-        plt.text(j, i, format(cm[i, j], fmt),
-                 horizontalalignment="center",
-                 color="white" if cm[i, j] > thresh else "black")
+    logger.log('====== list_config_str checked OK =====')
 
-    plt.ylabel('True label')
-    plt.xlabel('Predicted label')
-    plt.grid(False)
-    plt.tight_layout()
-    return fig
 
+def check_key(dict_base, other):
+    for k, v in other.items():
+        if isinstance(v, dict):
+            assert k in dict_base.keys(), f'間違えたkeyを入力しています({k})'
+            check_key(dict_base[k], v)
+        else:
+            assert k in dict_base.keys(), f'間違えたkeyを入力しています({k})'

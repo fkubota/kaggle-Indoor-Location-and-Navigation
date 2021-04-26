@@ -1,2 +1,2 @@
-globals:
-  seed: 5713
+feature:
+  num_feats: 20
