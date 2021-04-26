@@ -2,13 +2,16 @@ from ipdb import set_trace as st
 import os
 import yaml
 import torch
+import pickle
 import random
 import itertools
 import subprocess
 import numpy as np
+import pandas as pd
 from loguru import logger
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
+from sklearn.preprocessing import LabelEncoder, StandardScaler
 
 
 def init_exp(config, config_update, run_name):
@@ -117,8 +120,9 @@ def set_debug_config(config):
         logger.info(':: debug mode ::')
         config['globals']['num_epochs'] = 2
         config['split']['n_fold'] = 2
-        config['loader']['train']['batch_size'] = 1
-        config['loader']['valid']['batch_size'] = 1
+        # config['loader']['train']['batch_size'] = 2
+        # config['loader']['valid']['batch_size'] = 2
+        # config['loader']['test']['batch_size'] = 2
         return config
     else:
         return config
@@ -137,38 +141,66 @@ def sec2time(sec):
     return str_time
 
 
-def LWLRAP(preds, labels):
-    '''
-    https://github.com/yuki-a4/rfcx-species-audio-detection/blob/main/yuki/notebook/ex_059_resnest_changeLoss_lr_0.15_aug0.3_seed239.ipynb
-    '''
-    # st()
-    # device
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    preds, labels = preds.to(device), labels.to(device)
+def get_dataset(config):
+    num_feats = config['feature']['num_feats']
+    bssid_feats = [f'bssid_{i}' for i in range(num_feats)]
+    rssi_feats = [f'rssi_{i}' for i in range(num_feats)]
 
-    # Ranks of the predictions
-    ranked_classes = torch.argsort(preds, dim=-1, descending=True)
-    # i, j corresponds to rank of prediction in row i
-    class_ranks = torch.zeros_like(ranked_classes)
-    for i in range(ranked_classes.size(0)):
-        for j in range(ranked_classes.size(1)):
-            class_ranks[i, ranked_classes[i][j]] = j + 1
-    # Mask out to only use the ranks of relevant GT labels
-    ground_truth_ranks = class_ranks * labels + (1e6) * (1 - labels)
-    # All the GT ranks are in front now
-    sorted_ground_truth_ranks, _ = torch.sort(ground_truth_ranks,
-                                              dim=-1, descending=False)
-    # Number of GT labels per instance
-    # num_labels = labels.sum(-1)
-    pos_matrix = torch.tensor(
-            np.array([i+1 for i in range(labels.size(-1))])).unsqueeze(0)
-    pos_matrix = pos_matrix.to(device)
-    sorted_ground_truth_ranks = sorted_ground_truth_ranks.to(device)
-    score_matrix = pos_matrix / sorted_ground_truth_ranks
-    score_mask_matrix, _ = torch.sort(labels, dim=-1, descending=True)
-    scores = score_matrix * score_mask_matrix
-    score = scores.sum() / labels.sum()
-    return score.item()
+    with open('./../../data_ignore/input/wifi/train_all.pkl', 'rb') as f:
+        df_train = pickle.load(f)
+        # df_train = pickle.load(f).iloc[::100, :]
+    with open('./../../data_ignore/input/wifi/test_all.pkl', 'rb') as f:
+        df_test = pickle.load(f)
+        # df_test = pickle.load(f).iloc[::100, :]
+    sub = pd.read_csv(config['path']['path_sample_submission'], index_col=0)
+
+    # bssidの一覧作成
+    # wifi_bassidにはtrainとtest両方のbssidの一覧が含まれる
+    wifi_bssids = []
+    for i in range(num_feats):
+        wifi_bssids.extend(df_train.iloc[:, i].values.tolist())
+    wifi_bssids = list(set(wifi_bssids))
+
+    wifi_bssids_size = len(wifi_bssids)
+    logger.info(f'BSSID TYPES: {wifi_bssids_size}')
+
+    wifi_bssids_test = []
+    for i in range(num_feats):
+        wifi_bssids_test.extend(df_test.iloc[:, i].values.tolist())
+    wifi_bssids_test = list(set(wifi_bssids_test))
+
+    wifi_bssids_size = len(wifi_bssids_test)
+    logger.info(f'BSSID TYPES: {wifi_bssids_size}')
+
+    wifi_bssids.extend(wifi_bssids_test)
+    wifi_bssids_size = len(wifi_bssids)
+    logger.info(f'BSSID TYPES: {wifi_bssids_size}')
+
+    # LabelEncoding & StandardScaler
+    le = LabelEncoder()
+    le.fit(wifi_bssids)
+    le_site = LabelEncoder()
+    le_site.fit(df_train['site_id'])
+
+    ss = StandardScaler()
+    ss.fit(df_train.loc[:, rssi_feats])
+
+    df_train.loc[:, rssi_feats] = ss.transform(df_train.loc[:, rssi_feats])
+    df_test.loc[:, rssi_feats] = ss.transform(df_test.loc[:, rssi_feats])
+    for feat in bssid_feats:
+        df_train.loc[:, feat] = le.transform(df_train.loc[:, feat])
+        df_test.loc[:, feat] = le.transform(df_test.loc[:, feat])
+
+        df_train.loc[:, feat] = df_train.loc[:, feat] + 1
+        df_test.loc[:, feat] = df_test.loc[:, feat] + 1
+
+    df_train.loc[:, 'site_id'] = le_site.transform(df_train.loc[:, 'site_id'])
+    df_test.loc[:, 'site_id'] = le_site.transform(df_test.loc[:, 'site_id'])
+
+    df_train.reset_index(drop=True, inplace=True)
+    df_test.reset_index(drop=True, inplace=True)
+
+    return df_train, df_test, sub, bssid_feats, rssi_feats, wifi_bssids_size
 
 
 def plot_confusion_matrix(truth, pred, n_classes, normalize=False, title=''):
@@ -196,3 +228,4 @@ def plot_confusion_matrix(truth, pred, n_classes, normalize=False, title=''):
     plt.grid(False)
     plt.tight_layout()
     return fig
+

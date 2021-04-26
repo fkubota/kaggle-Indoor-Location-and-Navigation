@@ -1,28 +1,16 @@
 globals:
   seed: 5713
-  debug: False
-  num_epochs: 35
-  num_feats: 20
+  debug: True
+  num_epochs: 100
 
 path:
   dir_train: '../../data_ignore/input/train/'
   dir_test: '../../data_ignore/input/test/'
   path_train_tp: '../../data_ignore/input/train_tp.csv'
   path_sample_submission: '../../data_ignore/input/sample_submission.csv'
+  path_sample_submission_floor99: '../../data/input/floor_99per_acc_sub.csv'
   dir_save: '../../data/exp/'
   dir_save_ignore: '../../data_ignore/exp/'
-
-dataset:
-  name: SpectrogramDatasetWithHPSS
-  params:
-    period: 5
-    shift_duration: 4
-    img_size: 224
-  melspec_params:
-    n_mels: 128
-    # n_mels: 256
-    fmin: 90
-    fmax: 14000
 
 loader:
   train:
@@ -37,18 +25,18 @@ loader:
     batch_size: 512
     shuffle: False
     num_workers: 4
-    
+
+model:
+  params:
+    pretrained: True
+    n_classes: 24
+
+feature:
+  num_feats: 80
 
 split:
   seed: 5713
   n_fold: 5
-  # n_fold: 2
- 
-model:
-  name: ResNet18
-  params:
-    pretrained: True
-    n_classes: 24
 
 loss:
   name: MSELoss
@@ -57,7 +45,7 @@ loss:
 optimizer:
   name: Adam
   params:
-    lr: 0.001
+    lr: 0.005
 
 scheduler:
   name: ReduceLROnPlateau

@@ -7,7 +7,7 @@ from loguru import logger
 
 import utils as U
 import trainner
-import configuration as C
+# import configuration as C
 import result_handler as rh
 
 
@@ -22,7 +22,7 @@ def run_exp(run_name, config_update):
     dir_save, _, config = U.init_exp(config, config_update, run_name)
     config = U.set_debug_config(config)
     _, _, exp_name = U.get_save_dir_exp(config, run_name)
-    rh.save_model_architecture(dir_save, C.get_model(config))
+    # rh.save_model_architecture(dir_save, C.get_model(config))
 
     # train
     logger.info('='*30)
