@@ -186,7 +186,7 @@ def check_update_config_key(list_config_str):
         config_update = yaml.safe_load(config_str)
         check_key(config, config_update)
 
-    logger.log('====== list_config_str checked OK =====')
+    print('====== list_config_str checked OK =====')
 
 
 def check_key(dict_base, other):
@@ -196,3 +196,16 @@ def check_key(dict_base, other):
             check_key(dict_base[k], v)
         else:
             assert k in dict_base.keys(), f'間違えたkeyを入力しています({k})'
+
+
+def sec2time(sec):
+    hour = int(sec//3600)
+    minute = int((sec - 3600*hour)//60)
+    second = int(sec - 3600*hour - 60*minute)
+
+    hour = str(hour).zfill(2)
+    minute = str(minute).zfill(2)
+    second = str(second).zfill(2)
+    str_time = f'{hour}:{minute}:{second}'
+
+    return str_time

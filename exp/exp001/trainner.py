@@ -151,7 +151,7 @@ def train_cv(config, run_name):
     # save oof #
     ############
     oofs_df = pd.concat(oofs)
-    oofs_df.to_csv(f'{dir_save_exp}/oof.csv', index=False)
+    oofs_df.to_csv(f'{dir_save_ignore_exp}/oof.csv', index=False)
 
     ###################
     # save submission #
