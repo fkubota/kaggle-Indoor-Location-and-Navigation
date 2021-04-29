@@ -5,8 +5,8 @@ icecream==2.0.0
 matplotlib==3.3.3
 soundfile==0.10.3.post1
 numpy==1.19.5
-pandas==1.2.0
-librosa==0.8.0
+pandas==1.2.4
+tabulate==0.8.9
 scikit-learn==0.24.0
 scipy==1.6.0
 opencv-python==4.5.1.48
