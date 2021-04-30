@@ -475,3 +475,14 @@ Microsoft Researchは、マイクロソフトの研究子会社です。その�
 
 
 ### 20210428
+- nb026
+    - やってること
+        1. bssidを固定値にしたい
+        2. しかし、bssidの数が多く、siteによって数がまばらである
+        3. n個に絞りたい。n個はどうやって選ぶ？。
+        4. officialだと思われるbssidを使う。
+        5. ssidに紐づくbssidの数を数える。この数が多いssidがofficialなssidであり、そのssidに紐づくbssidをオフィシャルなbssidとする。
+    
+        <img src='./data/info/readme/032.png' width='500'>  
+
+        6
