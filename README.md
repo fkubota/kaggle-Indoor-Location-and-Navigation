@@ -497,3 +497,6 @@ Microsoft Researchは、マイクロソフトの研究子会社です。その�
         1. あるssidに紐づくbssidのn_samplesが多いものを取得
         2. bssidの数がN_BSSID未満であれば次のssidからbssidを取得する
         3. これを、N_BSSID分、bssidを取得できたら、これをfixed_bssidとする
+
+### 20210501
+- exp002
