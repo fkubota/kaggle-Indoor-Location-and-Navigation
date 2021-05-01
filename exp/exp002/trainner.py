@@ -63,11 +63,11 @@ def train_cv(config, run_name):
         # data loader
         loaders = {}
         loader_config = config["loader"]
-        loaders["train"] = DataLoader(D.IndoorDataset(trn_df, 'train', fixed_bssid_feats),
+        loaders["train"] = DataLoader(D.IndoorDatasetFixedBssid(trn_df, 'train', fixed_bssid_feats),
                                       **loader_config["train"], worker_init_fn=D.worker_init_fn)
-        loaders["valid"] = DataLoader(D.IndoorDataset(val_df, 'valid', fixed_bssid_feats),
+        loaders["valid"] = DataLoader(D.IndoorDatasetFixedBssid(val_df, 'valid', fixed_bssid_feats),
                                       **loader_config["valid"], worker_init_fn=D.worker_init_fn)
-        loaders["test"] = DataLoader(D.IndoorDataset(df_test, 'test', fixed_bssid_feats),
+        loaders["test"] = DataLoader(D.IndoorDatasetFixedBssid(df_test, 'test', fixed_bssid_feats),
                                      **loader_config["test"], worker_init_fn=D.worker_init_fn)
 
         # model
