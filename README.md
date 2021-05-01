@@ -485,4 +485,15 @@ Microsoft Researchは、マイクロソフトの研究子会社です。その�
     
         <img src='./data/info/readme/032.png' width='500'>  
 
-        6
+        6. officialなbssidのうちどれを使う？？(record数が多いものが良いのでは？)
+
+
+### 20210430
+- nb027
+    - `from_nikaido_make_Dataset.ipynb` を参考にデータセットを作成
+    - nb026をもとにfixed_bssidを決める
+    - N_BSSID = 300 としている
+    - 手順
+        1. あるssidに紐づくbssidのn_samplesが多いものを取得
+        2. bssidの数がN_BSSID未満であれば次のssidからbssidを取得する
+        3. これを、N_BSSID分、bssidを取得できたら、これをfixed_bssidとする
