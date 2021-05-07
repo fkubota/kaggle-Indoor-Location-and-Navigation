@@ -54,8 +54,8 @@ def train_cv(config, run_name):
         logger.info('=' * 20)
 
         # train/valid data
-        trn_df = df_train.loc[trn_idx, fixed_bssid_feats + ['x', 'y', 'floor']].reset_index(drop=True)
-        val_df = df_train.loc[val_idx, fixed_bssid_feats + ['x', 'y', 'floor']].reset_index(drop=True)
+        trn_df = df_train.loc[trn_idx, fixed_bssid_feats + ['x', 'y', 'floor', 'site_id']].reset_index(drop=True)
+        val_df = df_train.loc[val_idx, fixed_bssid_feats + ['x', 'y', 'floor', 'site_id']].reset_index(drop=True)
         if debug:
             trn_df = trn_df.iloc[::50, :]
             val_df = val_df.iloc[::50, :]
@@ -186,7 +186,7 @@ class Learner(pl.LightningModule):
     def training_step(self, batch, batch_idx):
         x, y = batch
         output = self.model(x)
-        loss = self.xy_criterion(output["xy"], y["xy"])
+        loss = self.xy_criterion(output["xy"], y["xy"]) + self.f_criterion(output['floor'], y['floor'])
         return loss
 
     def validation_step(self, batch, batch_idx):

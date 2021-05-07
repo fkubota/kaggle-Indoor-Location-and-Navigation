@@ -89,41 +89,45 @@ class FixedBssidMLP(nn.Module):
         )
 
         concat_size = 64 + (num_feats * 64)
+        self.bn1 = nn.BatchNorm1d(concat_size)
 
-        self.batch_norm1 = nn.BatchNorm1d(concat_size)
-        self.dropout1 = nn.Dropout(0.2)
-        self.dense1 = nn.utils.weight_norm(nn.Linear(concat_size, 2048))
+        self.flatten = nn.Flatten()
 
-        self.batch_norm2 = nn.BatchNorm1d(2048)
-        self.dropout2 = nn.Dropout(0.5)
-        self.dense2 = nn.utils.weight_norm(nn.Linear(2048, 1048))
+        self.dropout1 = nn.Dropout(0.3)
+        self.linear1 = nn.Linear(in_features=concat_size, out_features=256)#, bias=False)
+        self.bn2 = nn.BatchNorm1d(256)
 
-        self.batch_norm3 = nn.BatchNorm1d(1048)
-        self.dropout3 = nn.Dropout(0.5)
-        self.dense3 = nn.utils.weight_norm(nn.Linear(1048, 16))
+        self.linear2 = nn.Linear(in_features=256, out_features=128)#, bias=False)
+        self.linear3 = nn.Linear(in_features=128, out_features=16)#, bias=False)
 
-        self.xy = nn.Linear(in_features=16, out_features=2)
-        self.floor = nn.Linear(in_features=16, out_features=1)
-        
-    def forward(self, fixed_bssid, site):
+        self.bn3 = nn.BatchNorm1d(128)
+        self.bn4 = nn.BatchNorm1d(16)
+
+        self.xy = nn.Linear(in_features=16, out_features=2)#, bias=False)
+        self.floor = nn.Linear(in_features=16, out_features=1)#, bias=False)
+
+    # def forward(self, fixed_bssid, site):
+    def forward(self, x):
+        site = x['site_id']
         site = torch.reshape(site, (-1, 1))
         site_out = self.site_embedding(site)
+        site_out = self.flatten(site_out)
+        fixed_bssid = x['fixed_bssid_feats']
         fixed_bssid_out = self.fixed_bssid(fixed_bssid)
 
         x = torch.cat([site_out, fixed_bssid_out], dim=1)
 
-        x = self.batch_norm1(x)
+        x = self.bn1(x)
         x = self.dropout1(x)
-        x = F.relu(self.dense1(x))
+        x = F.relu(self.linear1(x))
+        x = self.bn2(x)
 
-        x = self.batch_norm2(x)
-        x = self.dropout2(x)
-        x = F.relu(self.dense2(x))
+        x = F.relu(self.linear2(x))
+        x = self.bn3(x)
 
-        x = self.batch_norm3(x)
-        x = self.dropout3(x)
-        x = self.dense3(x)
+        x = F.relu(self.linear3(x))
+        x = self.bn4(x)
 
-        xy = self.xy(x)
-        floor = self.floor(x)
-        return xy, floor
+        xy = self.xy(x).squeeze(1)
+        floor = torch.relu(self.floor(x)).view(-1)
+        return {"xy": xy, "floor": floor}

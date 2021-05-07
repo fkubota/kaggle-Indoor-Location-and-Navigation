@@ -1,0 +1,23 @@
+{
+    "os": "Linux-5.8.0-50-generic-x86_64-with-glibc2.29",
+    "python": "3.8.5",
+    "heartbeatAt": "2021-05-02T08:56:22.230894",
+    "startedAt": "2021-05-02T08:56:21.118491",
+    "docker": null,
+    "gpu": "GeForce RTX 3070",
+    "gpu_count": 1,
+    "cpu_count": 16,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "<python with no main file>",
+    "git": {
+        "remote": "git@github.com:fkubota/kaggle-Indoor-Location-and-Navigation.git",
+        "commit": "441a8788007414c70641a583451e4b6c59513e0e"
+    },
+    "email": null,
+    "root": "/home/user/work/kaggle-Indoor-Location-and-Navigation",
+    "host": "e7c9ad9e1767",
+    "username": "user",
+    "executable": "/usr/bin/python3"
+}

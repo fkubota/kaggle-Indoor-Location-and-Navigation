@@ -38,7 +38,7 @@ class IndoorDatasetFixedBssid(Dataset):
         self.df = df
         self.phase = phase
         self.fixed_bssid_feats = df[fixed_bssid_feats].values.astype(np.float32)
-#         self.site_id = df['site_id'].values.astype(int)
+        self.site_id = df['site_id'].values.astype(int)
 
         if phase in ['train', 'valid']:
             self.xy = df[['x', 'y']].values.astype(np.float32)
@@ -51,6 +51,7 @@ class IndoorDatasetFixedBssid(Dataset):
 
         feature = {
             'fixed_bssid_feats': self.fixed_bssid_feats[idx],
+            'site_id': self.site_id[idx]
         }
         if self.phase in ['train', 'valid']:
             target = {

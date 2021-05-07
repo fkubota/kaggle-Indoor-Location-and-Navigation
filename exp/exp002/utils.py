@@ -13,6 +13,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 
+from trainner import mean_position_error
 
 def init_exp(config, config_update, run_name):
     '''
@@ -244,3 +245,18 @@ def get_dataset_fixed_bssid(config):
     df_test.reset_index(drop=True, inplace=True)
 
     return df_train, df_test, sub, fixed_bssid_feats
+
+
+def check_sub(dir_save):
+    df_sub_old = pd.read_csv('./../../data/exp/exp001/run002/sub.csv')
+    df_sub_new = pd.read_csv(f'{dir_save}/sub.csv')
+
+    mpe = mean_position_error(
+            df_sub_new.x,
+            df_sub_new.y,
+            df_sub_new.floor,
+            df_sub_old.x,
+            df_sub_old.y,
+            df_sub_old.floor,
+            )
+    return mpe

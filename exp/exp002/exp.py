@@ -28,6 +28,10 @@ def run_exp(run_name, config_update):
     logger.info('='*30)
     trainner.train_cv(config, run_name)
 
+    # check sub
+    check = U.check_sub(dir_save)
+    logger.info(f'sub mpe: {check}')
+
     # end
     end = time.time()
     time_all = end - start
@@ -52,27 +56,19 @@ def main():
     list_config_str = [
             '''
             feature:
-              num_feats: 20
-            ''',
-            '''
-            feature:
-              num_feats: 45
-            ''',
-            '''
-            feature:
               num_feats: 50
             ''',
             '''
             feature:
-              num_feats: 65
-            ''',
-            '''
-            feature:
-              num_feats: 80
-            ''',
-            '''
-            feature:
               num_feats: 100
+            ''',
+            '''
+            feature:
+              num_feats: 200
+            ''',
+            '''
+            feature:
+              num_feats: 300
             ''',
             ]
 
