@@ -524,5 +524,28 @@ Microsoft Researchは、マイクロソフトの研究子会社です。その�
 
 
 ### 20210508
-- gridを追加
-    - 
+- gridのcsvを追加
+    - data_ignore/input/ に置いた 
+
+### 20210509
+- nb029
+    - waypointsのハンドラベリングがだめだということになったので画像処理で追加してみる
+    - 手法
+        1. 通路の領域を取得
+        2. 画像全体に点を打つ
+        3. 2の点のうち、1の内側にいる点のみ残す
+    - 死ぬほどうまくいった！
+    - examples
+
+        <img src='./data/info/readme/033.png' width='700'>  
+        <img src='./data/info/readme/034.png' width='700'>  
+        <img src='./data/info/readme/035.png' width='700'>  
+        <img src='./data/info/readme/036.png' width='700'>  
+    
+    - train_grid(青) と同時にプロットした場合
+
+        <img src='./data/info/readme/037.png' width='700'>  
+    
+    - hand_labelとtrain_gridの最近傍距離のヒストグラム
+
+        <img src='./data/info/readme/038.png' width='300'>  
