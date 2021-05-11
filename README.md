@@ -546,6 +546,17 @@ Microsoft Researchは、マイクロソフトの研究子会社です。その�
 
         <img src='./data/info/readme/037.png' width='700'>  
     
+    - extra_gridとtrain_gridの最近傍距離のヒストグラム
+
+        <img src='./data/info/readme/039.png' width='300'>  
+    
     - hand_labelとtrain_gridの最近傍距離のヒストグラム
 
         <img src='./data/info/readme/038.png' width='300'>  
+
+
+### 20210511
+- exp003
+    - base: exp001
+    - 24site以外も使う
+    - 24site以外の特徴量はnb028で作成済み

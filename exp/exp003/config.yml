@@ -1,0 +1,58 @@
+globals:
+  seed: 5713
+  debug: True
+  num_epochs: 100
+
+path:
+  dir_train: '../../data_ignore/input/train/'
+  dir_test: '../../data_ignore/input/test/'
+  path_sample_submission: '../../data_ignore/input/sample_submission.csv'
+  path_sample_submission_floor99: '../../data/input/floor_99per_acc_sub.csv'
+  dir_save: '../../data/exp/'
+  dir_save_ignore: '../../data_ignore/exp/'
+
+loader:
+  train:
+    batch_size: 512
+    shuffle: True
+    num_workers: 4
+  valid:
+    batch_size: 512
+    shuffle: False
+    num_workers: 4
+  test:
+    batch_size: 512
+    shuffle: False
+    num_workers: 4
+
+model:
+  params:
+    pretrained: True
+    n_classes: 24
+
+feature:
+  num_feats: 80
+  seed: 5713
+  num_extra_site: 0
+
+split:
+  seed: 5713
+  n_fold: 5
+
+loss:
+  name: MSELoss
+  params:
+
+optimizer:
+  name: Adam
+  params:
+    lr: 0.005
+
+scheduler:
+  name: ReduceLROnPlateau
+  params:
+    factor: 0.1
+    patience: 3
+
+
+
