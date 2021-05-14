@@ -561,7 +561,17 @@ Microsoft Researchは、マイクロソフトの研究子会社です。その�
     - 24site以外も使う
     - 24site以外の特徴量はnb028で作成済み
     - extra_site_num = [0, 5, 10, 20, 40, 80, 130, 200]
+    - 結果
+        - 追加するほど悪くなった...残念
+        <img src='./data/info/readme/040.png' width='400'>  
 
 
+### 20210513
 - nb030
-
+    - extra_gridの最適化を行った  
+        <img src='./data/info/readme/041.png' width='400'>  
+        <img src='./data/info/readme/042.png' width='400'>  
+        <img src='./data/info/readme/043.png' width='400'>  
+        <img src='./data/info/readme/044.png' width='400'>  
+        <img src='./data/info/readme/045.png' width='400'>  
+        <img src='./data/info/readme/046.png' width='400'>  
