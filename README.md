@@ -560,3 +560,8 @@ Microsoft Researchは、マイクロソフトの研究子会社です。その�
     - base: exp001
     - 24site以外も使う
     - 24site以外の特徴量はnb028で作成済み
+    - extra_site_num = [0, 5, 10, 20, 40, 80, 130, 200]
+
+
+- nb030
+
