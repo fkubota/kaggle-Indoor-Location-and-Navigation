@@ -1,0 +1,63 @@
+wandb_version: 1
+
+_wandb:
+  desc: null
+  value:
+    cli_version: 0.10.12
+    framework: torch
+    is_jupyter_run: true
+    is_kaggle_kernel: false
+    python_version: 3.8.5
+config:
+  desc: null
+  value:
+    feature:
+      num_extra_site: 40
+      num_feats: 80
+      seed: 5713
+    globals:
+      debug: false
+      num_epochs: 100
+      seed: 5713
+    loader:
+      test:
+        batch_size: 512
+        num_workers: 4
+        shuffle: false
+      train:
+        batch_size: 512
+        num_workers: 4
+        shuffle: true
+      valid:
+        batch_size: 512
+        num_workers: 4
+        shuffle: false
+    loss:
+      name: MSELoss
+      params: null
+    model:
+      params:
+        n_classes: 24
+        pretrained: true
+    optimizer:
+      name: Adam
+      params:
+        lr: 0.005
+    path:
+      dir_save: ../../data/exp/
+      dir_save_ignore: ../../data_ignore/exp/
+      dir_test: ../../data_ignore/input/test/
+      dir_train: ../../data_ignore/input/train/
+      path_sample_submission: ../../data_ignore/input/sample_submission.csv
+      path_sample_submission_floor99: ../../data/input/floor_99per_acc_sub.csv
+    scheduler:
+      name: ReduceLROnPlateau
+      params:
+        factor: 0.1
+        patience: 3
+    split:
+      n_fold: 5
+      seed: 5713
+model_name:
+  desc: null
+  value: LSTMModel

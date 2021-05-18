@@ -56,11 +56,35 @@ def main():
     list_config_str = [
             '''
             feature:
-              num_extra_site: 100
+              num_extra_site: 0
             ''',
             '''
             feature:
-              num_extra_site: 0
+              num_extra_site: 5
+            ''',
+            '''
+            feature:
+              num_extra_site: 10
+            ''',
+            '''
+            feature:
+              num_extra_site: 20
+            ''',
+            '''
+            feature:
+              num_extra_site: 40
+            ''',
+            '''
+            feature:
+              num_extra_site: 80
+            ''',
+            '''
+            feature:
+              num_extra_site: 130
+            ''',
+            '''
+            feature:
+              num_extra_site: 200
             ''',
             ]
 

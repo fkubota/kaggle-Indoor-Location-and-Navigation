@@ -131,9 +131,10 @@ def train_cv(config, run_name):
         val_df["oof_floor"] = oof_f
         oofs.append(val_df)
         
+        logics = df_train.loc[val_idx, :].site_id.isin(df_test.site_id.unique()).values
         val_score = mean_position_error(
-            val_df["oof_x"].values, val_df["oof_y"].values, 0,
-            val_df['x'].values, val_df['y'].values, 0)
+            val_df["oof_x"].values[logics], val_df["oof_y"].values[logics], 0,
+            val_df['x'].values[logics], val_df['y'].values[logics], 0)
         val_scores.append(val_score)
         logger.info(f"fold {i_fold+1}: mean position error {val_score}")
 
@@ -153,7 +154,7 @@ def train_cv(config, run_name):
     # save oof #
     ############
     oofs_df = pd.concat(oofs)
-    mpe_oof_site24 = calc_mpe_site24(oofs_df, df_train, df_test)
+    # mpe_oof_site24 = calc_mpe_site24(oofs_df, df_train, df_test)
     oofs_df.to_csv(f'{dir_save_ignore_exp}/oof.csv', index=False)
 
     ###################
@@ -174,7 +175,7 @@ def train_cv(config, run_name):
     wandb.log({
         'MPE/val': np.mean(val_scores),
         'CV_std': np.std(val_scores),
-        'mpe_site24': mpe_oof_site24,
+        # 'mpe_site24': mpe_oof_site24,
         'extra_site': extra_site,
         })
     wandb.finish()
@@ -250,12 +251,12 @@ def evaluate(model, loaders, phase):
     return x_list, y_list, f_list
 
 
-def calc_mpe_site24(oof, df_train, df_test):
-    oof = oof[df_train.site_id.isin(df_test.site_id.unique()).values]
-    xhat = oof.oof_x.values
-    yhat = oof.oof_y.values
-    fhat = oof.oof_floor.values
-    x = oof.x.values
-    y = oof.y.values
-    f = oof.floor.values
-    return mean_position_error(xhat, yhat, fhat, x, y, f)
+# def calc_mpe_site24(oof, df_train, df_test):
+#     oof = oof[df_train.site_id.isin(df_test.site_id.unique()).values]
+#     xhat = oof.oof_x.values
+#     yhat = oof.oof_y.values
+#     # fhat = oof.oof_floor.values
+#     x = oof.x.values
+#     y = oof.y.values
+#     # f = oof.floor.values
+#     return mean_position_error(xhat, yhat, 0, x, y, 0)
