@@ -1,12 +1,13 @@
 <img src='./data/info/readme/001.png' width='1500'>  
 
 # kaggle-Indoor-Location-and-Navigation
-結果  
+[Indoor-Location-and-Navigation](https://www.kaggle.com/c/indoor-location-navigation/overview) コンペのリポジトリ
 
+**結果**  
+16/1170位  
 <img src='./data/info/readme/047.png' width='1000'>  
 
 
-[Indoor-Location-and-Navigation](https://www.kaggle.com/c/indoor-location-navigation/overview) コンペのリポジトリ
 
 デバッグ実行: `ipython3 --pdb exp.py`  
 docker build: `sh build_docker.sh`  
